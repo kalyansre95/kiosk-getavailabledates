@@ -1,0 +1,5 @@
+location           = "West US 2"
+environment        = "dev"
+project_name       = "kiosk"
+sql_admin_user     = "sqladminuser"
+sql_admin_password = "StrongP@ssword12345"

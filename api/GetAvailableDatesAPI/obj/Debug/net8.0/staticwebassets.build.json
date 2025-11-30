@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "k6inBQ0P0yKQlch+qVDvGTkRgQ6yXo4mK4zrcEhKUUU=",
+  "Source": "GetAvailableDatesAPI",
+  "BasePath": "_content/GetAvailableDatesAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

@@ -1,0 +1,15 @@
+# Terraform
+*.tfstate
+*.tfstate.backup
+.terraform/
+.terraform.lock.hcl
+
+# Dotnet build output
+bin/
+obj/
+
+# VS Code
+.vscode/
+
+# TF Plan
+tfplan

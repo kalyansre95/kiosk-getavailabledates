@@ -1,0 +1,6 @@
+@GetAvailableDatesAPI_HostAddress = http://localhost:5287
+
+GET {{GetAvailableDatesAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
