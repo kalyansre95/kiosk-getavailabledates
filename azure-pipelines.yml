@@ -1,0 +1,50 @@
+trigger:
+  - main
+
+pool:
+  vmImage: 'windows-latest'
+
+steps:
+# 1. Checkout code
+- checkout: self
+
+# 2. Setup .NET 8 SDK
+- task: UseDotNet@2
+  inputs:
+    packageType: 'sdk'
+    version: '8.x'
+
+# 3. Restore dependencies
+- script: dotnet restore api/GetAvailableDatesAPI/GetAvailableDatesAPI.csproj
+  displayName: 'Restore dependencies'
+
+# 4. Build the project
+- script: dotnet build api/GetAvailableDatesAPI/GetAvailableDatesAPI.csproj --configuration Release --no-restore
+  displayName: 'Build project'
+
+# 5. Publish to output folder
+- script: dotnet publish api/GetAvailableDatesAPI/GetAvailableDatesAPI.csproj --configuration Release --output $(Build.ArtifactStagingDirectory)
+  displayName: 'Publish project'
+
+# 6. Package ZIP for App Service
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: '$(Build.ArtifactStagingDirectory)'
+    includeRootFolder: false
+    archiveType: zip
+    archiveFile: '$(Build.ArtifactStagingDirectory)/app.zip'
+
+# 7. Publish artifact
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    artifactName: 'drop'
+
+# 8. Deploy to Azure App Service
+- task: AzureWebApp@1
+  inputs:
+    azureSubscription: 'kiosk-azure-connection'
+    appName: 'app-kiosk-getavailabledates-dev'
+    package: '$(Build.ArtifactStagingDirectory)/app.zip'
+    enableCustomDeployment: true
+    deploymentMethod: 'auto'
