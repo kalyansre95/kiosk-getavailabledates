@@ -214,5 +214,5 @@ This repository demonstrates:
 ## Author
 
 **Kalyan Chakravarthy Ala**
-Azure | Terraform | DevOps | Cloud Infrastructure
+|Azure | Terraform | DevOps | Cloud Infrastructure
 ---
